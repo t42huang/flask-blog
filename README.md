@@ -15,3 +15,15 @@
 
 - simply run `python app.py`
 - you should have your app served up on `http://127.0.0.1:5000/` by default
+
+## Notes on Flask
+
+### command-line options
+
+- `flask --help`: run this to read more about the flask command-line options
+
+- `export FLASK_APP="index.py"`
+- `flask run`: this will run the app with a dev server
+
+- `flask run --help` to read more about options available for `flask run`
+- `flask run --host 0.0.0.0`: The dev web server listens to localhost network interface by default, which means only connections and requests originated from this computer will be accepted. By specifying the host to `0.0.0.0`, this asks the dev web server to listen for connections and requests on the public network interface, which means other devices (e.g. your phone, another computer) connected to the same network (e.g. wifi) will be able to visit this app via your computer's ip address and port, e.g. `http://192.168.0.16:5000`
