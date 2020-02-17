@@ -33,3 +33,7 @@
 
 - Jinja2 template engine
 - Bootstrap frontend framework
+
+## Reference
+
+- Book: Flask Web Development - Developing Web Applications with Python, second edition, by Miguel Grinberg
