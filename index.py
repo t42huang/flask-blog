@@ -23,10 +23,16 @@ class NameForm(FlaskForm):
     name = StringField("What's your name?", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def hello_world():
+    name = ''
     form = NameForm()
-    return render_template('index.html', form=form, current_time=datetime.utcnow())
+    
+    if form.validate_on_submit():
+        name = form.name.data
+        form.name.data = ''
+    
+    return render_template('index.html', form=form, name=name, current_time=datetime.utcnow())
 
 @app.route('/hello/<name>')
 def hello(name):
