@@ -39,6 +39,11 @@
 - Moment for datetime transformations [Documentation](https://momentjs.com/docs/#/displaying/)
 - WTForms [Documentation](https://wtforms.readthedocs.io/en/stable/)
 
+
+## Other Notes
+
+- Check cookie session using [JSON Web Tokens](https://jwt.io/)
+
 ## Reference
 
 - Book: Flask Web Development - Developing Web Applications with Python, second edition, by Miguel Grinberg
