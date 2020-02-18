@@ -13,6 +13,7 @@
 - install flask extension 
   - `Bootstrap`: `pip install flask-bootstrap`
   - `Moment`: `pip install flask-moment`
+  - `flask-wtf`: `pip install flask-wtf`
 
 ### To have the app up running
 
@@ -36,6 +37,7 @@
 - Jinja2 template engine [Documentation](https://jinja.palletsprojects.com/en/2.11.x/)
 - Bootstrap frontend framework [Documentation](https://getbootstrap.com/docs/4.3/getting-started/introduction/)
 - Moment for datetime transformations [Documentation](https://momentjs.com/docs/#/displaying/)
+- WTForms [Documentation](https://wtforms.readthedocs.io/en/stable/)
 
 ## Reference
 
