@@ -4,6 +4,7 @@ from flask import Flask, render_template, session, redirect, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -18,14 +19,15 @@ app = Flask(__name__)
 # for better security, remove secret key from source code, store it in an environment variable instead
 app.config['SECRET_KEY'] = "Secret Key Hidden in Plain Sight LOL"
 
+# configure SQLAlchemy database instance
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'database.sqlite')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 # Innitiate flask extensions
 bootstrap = Bootstrap(app)
 moment = Moment(app)
-
-# configure and initialize SQLAlchemy database instance
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'database.sqlite')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 # define a simple form class with name field and submit button
 class NameForm(FlaskForm):

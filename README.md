@@ -10,11 +10,13 @@
 - navigiate to this repo, create a virtual environment: `python3 -m venv venv`, where the 2ed `venv` is the name of the virtual environment
 - activate this virtual environment: `source venv/bin/activate`, you should have `(venv)` prefix at your terminal prompt. (BTW, to deactivate it, simply run `deactivate`)
 - install `Flask` in this virtual environment: `pip install flask`
-- install flask extension 
+- install flask extension:
   - `Bootstrap`: `pip install flask-bootstrap`
   - `Moment`: `pip install flask-moment`
   - `flask-wtf`: `pip install flask-wtf`
   - `SQLALchemy`: `pip install flask-sqlalchemy`
+  - Alembic wrapper - `Flask-Migrate`: `pip install flask-migrate`
+    - then run `flask db init` in terminal
 
 ### To have the app up running
 
@@ -40,7 +42,7 @@
 - Moment for datetime transformations [Documentation](https://momentjs.com/docs/#/displaying/)
 - WTForms [Documentation](https://wtforms.readthedocs.io/en/stable/)
 - SQLALchemy [Documentation](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
-
+- Flask-Migrate [Documentation](https://flask-migrate.readthedocs.io/en/latest/)
 
 ## Notes on Database Population
 
