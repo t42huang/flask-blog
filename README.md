@@ -16,7 +16,7 @@
   - `flask-wtf`: `pip install flask-wtf`
   - `SQLALchemy`: `pip install flask-sqlalchemy`
   - Alembic wrapper - `Flask-Migrate`: `pip install flask-migrate`
-    - then run `flask db init` in terminal
+    - then run `flask db upgrade` in terminal
 
 ### To have the app up running
 
