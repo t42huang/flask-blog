@@ -48,12 +48,13 @@
 >>> export FLASK_APP=index.py
 >>> flask shell
 
->>> # create database defined in index.py
+# no need to run these 2 lines anymore after we add `shell_context_processor` in index.py
 >>> from index import db
->>> db.create_all()
+>>> from index import Role, User
+
+>>> db.create_all() # create database defined in index.py, only need to run once
 
 >>> # populate database manually
->>> from index import Role, User
 >>> admin = Role(name="Admin")
 >>> worker = Role(name="Worker")
 >>> manager = Role(name="Manager")

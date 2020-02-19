@@ -83,6 +83,9 @@ def index():
 def hello(name):
     return render_template('user.html', user=name)
 
+@app.shell_context_processor
+def prepare_shell_context():
+    return dict(db=db, User=User, Role=Role)
 
 @app.errorhandler(404)
 def page_not_found(e):
