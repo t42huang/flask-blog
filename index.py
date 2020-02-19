@@ -1,4 +1,6 @@
 import os
+from threading import Thread
+
 from flask import Flask, render_template, session, redirect, url_for, flash
 
 from flask_bootstrap import Bootstrap
@@ -73,12 +75,21 @@ app.config['FB_MAIL_SUBJECT_PREFIX'] = '[Flask Blog]'
 app.config['FB_MAIL_SENDER'] = os.environ.get('FLASKBLOG_SENDER')
 app.config['FLASKBLOG_ADMIN'] = os.environ.get('FLASKBLOG_ADMIN')
 
+
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
+    
 def send_email(to, subject, template, **kwargs):
     msg = Message(app.config['FB_MAIL_SUBJECT_PREFIX'] + subject,
         sender=app.config['FB_MAIL_SENDER'], recipients=[to])
     msg.body = render_template(template + '.txt', **kwargs)
     msg.html = render_template(template + '.html', **kwargs)
-    mail.send(msg)
+    
+    thr = Thread(target=send_async_email, args=[app, msg])
+    thr.start()
+    return thr
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
