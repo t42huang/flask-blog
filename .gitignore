@@ -1,5 +1,11 @@
+# virtual environment
 venv/
 
+# vs code editor related files
 .vscode/
 
+# compiled python bytecode files
 __pycache__/
+
+# database
+*.sqlite

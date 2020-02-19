@@ -14,6 +14,7 @@
   - `Bootstrap`: `pip install flask-bootstrap`
   - `Moment`: `pip install flask-moment`
   - `flask-wtf`: `pip install flask-wtf`
+  - `SQLALchemy`: `pip install flask-sqlalchemy`
 
 ### To have the app up running
 
@@ -38,7 +39,60 @@
 - Bootstrap frontend framework [Documentation](https://getbootstrap.com/docs/4.3/getting-started/introduction/)
 - Moment for datetime transformations [Documentation](https://momentjs.com/docs/#/displaying/)
 - WTForms [Documentation](https://wtforms.readthedocs.io/en/stable/)
+- SQLALchemy [Documentation](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
 
+
+## Notes on Database Population
+
+```python & bash
+>>> export FLASK_APP=index.py
+>>> flask shell
+
+>>> # create database defined in index.py
+>>> from index import db
+>>> db.create_all()
+
+>>> # populate database manually
+>>> from index import Role, User
+>>> admin = Role(name="Admin")
+>>> worker = Role(name="Worker")
+>>> manager = Role(name="Manager")
+>>> kevin = User(username='Kevin', role=manager)
+>>> gord = User(username='Gord', role=admin)
+>>> hector = User(username='Hector', role=worker)
+
+>>> print(worker)
+<Role 'Worker'>
+>>> print(admin)
+<Role 'Admin'>
+>>> print(worker.name)
+Worker
+>>> print(hector.role)
+<Role 'Worker'>
+>>> print(hector.id)
+None
+>>> print(admin.id)
+None
+
+>>> # commmit session changes
+>>> db.session.add_all([admin,worker,manager,kevin,gord,hector])
+>>> db.session.commit()
+
+>>> print(hector.id)
+2
+>>> print(admin.id)
+1
+
+# database queries
+>>> Role.query.all()
+[<Role 'Administrator'>, <Role 'Worker'>, <Role 'Manager'>]
+>>> User.query.all()
+[<User 'Gord'>, <User 'Hector'>, <User 'Kevin'>]
+>>> User.query.filter_by(role=worker).all()
+[<User 'Hector'>]
+>>> User.query.filter_by(role=admin).first()
+<User 'Gord'>
+```
 
 ## Other Notes
 
