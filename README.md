@@ -17,6 +17,15 @@
   - `SQLALchemy`: `pip install flask-sqlalchemy`
   - Alembic wrapper - `Flask-Migrate`: `pip install flask-migrate`
     - then run `flask db upgrade` in terminal
+  - `Flask-Mail`: `pip install flask-mail`, then add the following into your `~/.bash_profile`:
+
+```bash
+export MAIL_SERVER=<Your Mail SMTP Server>
+export MAIL_USERNAME=<Your Mail username>
+export MAIL_PASSWORD=<Your Mail password>
+export FLASKBLOG_SENDER='Flask Blog Admin <xxx@yyy.com>' # admin & email
+export FLASKBLOG_ADMIN=xxx@yyy.com # admin's email
+```
 
 ### To have the app up running
 
@@ -43,6 +52,8 @@
 - WTForms [Documentation](https://wtforms.readthedocs.io/en/stable/)
 - SQLALchemy [Documentation](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
 - Flask-Migrate [Documentation](https://flask-migrate.readthedocs.io/en/latest/)
+- Flask-Mail [Documentation](https://pythonhosted.org/flask-mail/)
+
 
 ## Notes on Database Population
 

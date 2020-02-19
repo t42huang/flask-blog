@@ -9,3 +9,6 @@ __pycache__/
 
 # database
 *.sqlite
+
+# MAC OS generated file
+.DS_Store
