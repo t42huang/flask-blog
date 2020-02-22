@@ -38,7 +38,7 @@ export FLASKBLOG_ADMIN=xxx@yyy.com # admin's email
 
 - `flask --help`: run this to read more about the flask command-line options
 
-- `export FLASK_APP="index.py"`
+- `export FLASK_APP="flaskblog.py"`
 - `flask run`: this will run the app with a dev server
 
 - `flask run --help` to read more about options available for `flask run`
@@ -111,6 +111,8 @@ None
 ## Other Notes
 
 - Check cookie session using [JSON Web Tokens](https://jwt.io/)
+- Obtain all dependencies: `pip freeze >requirements.txt`
+- [Python UnitTest](https://docs.python.org/3.6/library/unittest.html)
 
 ## Reference
 
