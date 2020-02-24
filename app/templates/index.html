@@ -2,7 +2,13 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block page_content %}
-    <h1>Hello {% if name %} {{ name }} {% else %} Stranger {% endif %}!</h1>
+    <h1>Hello 
+        {% if current_user.is_authenticated %} 
+            {{ current_user.username }}
+        {% else %} 
+            Stranger
+        {% endif %}!
+    </h1>
     {% if not known %}
         <p>Happy to see you again!</p>
     {% else %}
