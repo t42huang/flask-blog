@@ -1,5 +1,7 @@
 from flask import render_template, session, redirect, url_for, current_app, flash
 
+from flask_login import login_required
+
 from datetime import datetime
 
 from . import main
@@ -43,3 +45,8 @@ def index():
 @main.route('/hello/<name>')
 def hello(name):
     return render_template('user.html', user=name)
+
+@main.route('/secret')
+@login_required
+def secret():
+    return 'Only authenticated users are allowed!'
