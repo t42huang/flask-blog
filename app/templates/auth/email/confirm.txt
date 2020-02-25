@@ -1,0 +1,9 @@
+Dear {{ user.username }},
+
+Welcome to Flask Blog!
+
+Please click the following link to activate your account:
+{{ url_for('auth.confirm', token=token, _external=true) }}
+
+Best regards,
+The Flask Blog Team

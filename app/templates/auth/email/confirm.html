@@ -1,0 +1,9 @@
+<p>Dear {{ user.username }},</p>
+<br>
+<p>Welcome to Flask Blog!</p>
+<br>
+<p>Please click the following link to activate your account:</p>
+<a href="{{ url_for('auth.confirm', token=token, _external=true) }}">{{ url_for('auth.confirm', token=token, _external=true) }}</a>
+<br>
+<p>Best regards,</p>
+<p>The Flask Blog Team</p>
