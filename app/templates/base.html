@@ -25,6 +25,9 @@ type="image/x-icon">
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
+                <li><a href="{{ url_for('main.secret') }}">Secret</a></li>
+                <li><a href="{{ url_for('main.for_admins_only') }}">Admin</a></li>
+                <li><a href="{{ url_for('main.for_moderators_only') }}">Moderate</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

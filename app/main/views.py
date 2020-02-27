@@ -50,16 +50,22 @@ def hello(name):
 @main.route('/secret')
 @login_required
 def secret():
-    return 'Only authenticated users are allowed!'
+    title = 'Member only Page'
+    details = 'Only authenticated users are allowed! Please sign in or sign up to access this page.'
+    return render_template('simple_page.html', title=title, details=details)
 
 @main.route('/admin')
 @login_required
 @admin_required
 def for_admins_only():
-    return 'This page should only be visible to Adminisrators'
+    title = 'Admin Page'
+    details = 'This page should only be visible to users that has Administrator permission.'
+    return render_template('simple_page.html', title=title, details=details)
 
 @main.route('/moderate')
 @login_required
 @permission_required(Permission.MODERATE)
 def for_moderators_only():
-    return 'This page should only be visible to users that has MODERATE permission'
+    title = 'Moderate Page'
+    details = 'This page should only be visible to users that has Moderate permission.'
+    return render_template('simple_page.html', title=title, details=details)
