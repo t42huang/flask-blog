@@ -56,6 +56,10 @@ class User(UserMixin, db.Model):
         
         return True
 
+    def generate_change_email_token(self, new_email, expiration=3600):
+        s = Serializer(current_app.config['SECRET_KEY'], expiration)
+        return s.dumps({'id': self.id, 'new_email': new_email}).decode('utf-8')
+        
     def generate_reset_token(self, expiration=3600):
         s = Serializer(current_app.config['SECRET_KEY'], expiration)
         return s.dumps({'reset': self.id}).decode('utf-8')
@@ -75,6 +79,23 @@ class User(UserMixin, db.Model):
         user.password = new_password
         db.session.add(user)
         return True
+
+    @staticmethod
+    def change_email(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token.encode('utf-8'))
+        except:
+            return False
+        user = User.query.get(data.get('id'))
+        if user is None:
+            return False
+
+        user.email = data.get('new_email')
+        db.session.add(user)
+        
+        return user
+                
 
     def __repr__(self):
         return '<User %r>' % self.username

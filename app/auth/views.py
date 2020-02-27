@@ -4,7 +4,8 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 from . import auth
 from .forms import LoginForm, RegistrationForm, \
-    ChangePasswordForm, PasswordResetRequestForm, PasswordResetForm
+    ChangePasswordForm, PasswordResetRequestForm, PasswordResetForm, \
+    ChangeEmailForm
 
 from .. import db
 from ..models import User
@@ -101,6 +102,36 @@ def resend_confirmation():
     
     return redirect(url_for('main.index'))
 
+
+@auth.route('/change_email', methods=['GET', 'POST'])
+@login_required
+def change_email():
+    form = ChangeEmailForm()
+
+    if form.validate_on_submit():
+        token = current_user.generate_change_email_token(form.email.data)
+        send_email(current_user.email, 'Change your email',
+            'auth/email/change_email',
+            user=current_user, token=token, new_email=form.email.data
+        )
+        flash('A confirmation email has been sent to your original email regardng your request to change email.')
+        return redirect(url_for('main.index'))
+
+    return render_template('auth/change_email.html', form=form)
+
+@auth.route('/change_email/<token>')
+def confirm_change_email(token):
+    user = User.change_email(token)
+    if user:
+        db.session.commit()
+        send_email(current_user.email, 'Email Updated',
+            'auth/email/email_updated',
+            user=user
+        )
+        flash('Your Email has been updated. Please login with your new Email')
+    else:
+        flash('Something went wrong when changing your email, please contact your administrator regarding this issue.')
+    return redirect(url_for('auth.login'))
 
 @auth.route('/change_password', methods=['GET', 'POST'])
 @login_required

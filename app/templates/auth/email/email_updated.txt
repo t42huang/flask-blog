@@ -1,0 +1,11 @@
+Dear {{ user.username }},
+
+This email is to confirm that your Flask Blog Login email has been updated to this email - {{ user.email }}.
+
+Please click the following link to login:
+{{ url_for('auth.login', _external=true) }}
+
+Note: Do not reply to this email.
+
+Best regards,
+The Flask Blog Team

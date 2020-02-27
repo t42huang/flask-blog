@@ -1,0 +1,11 @@
+Dear {{ user.username }},
+
+This email is to confirm that you want to change your login email to {{ new_email }}.
+
+Please click the following link to confirm this change:
+{{ url_for('auth.confirm_change_email', token=token, _external=true) }}
+
+Note: Do not reply to this email.
+
+Best regards,
+The Flask Blog Team
