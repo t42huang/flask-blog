@@ -8,8 +8,9 @@ from . import main
 from .forms import NameForm
 
 from .. import db
-from ..models import User
+from ..models import User, Permission
 from ..email import send_email
+from ..decorators import admin_required, permission_required
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -50,3 +51,15 @@ def hello(name):
 @login_required
 def secret():
     return 'Only authenticated users are allowed!'
+
+@main.route('/admin')
+@login_required
+@admin_required
+def for_admins_only():
+    return 'This page should only be visible to Adminisrators'
+
+@main.route('/moderate')
+@login_required
+@permission_required(Permission.MODERATE)
+def for_moderators_only():
+    return 'This page should only be visible to users that has MODERATE permission'
