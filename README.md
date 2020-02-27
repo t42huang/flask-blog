@@ -53,7 +53,9 @@ export FLASKBLOG_ADMIN=xxx@yyy.com # admin's email
 - SQLALchemy [Documentation](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
 - Flask-Migrate [Documentation](https://flask-migrate.readthedocs.io/en/latest/)
 - Flask-Mail [Documentation](https://pythonhosted.org/flask-mail/)
-
+- Werkzeug for Password hashing and verification (alternatives: bcrypt, Passlib)
+- Flask-Login
+- itsdangerous
 
 ## Notes on Database Population
 
