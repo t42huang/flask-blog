@@ -1,11 +1,35 @@
 
 {% extends "base.html" %}
 
+{% block title %}Flask Blog - {{ user.username | capitalize }} {% endblock %}
+
 {% block page_content %}
-    {% if user %}
-        <h1>Hello {{ user | capitalize }}!</h1>
-    {% else %}
-        <h1>Hello there!</h1>
+    <h1>
+        {% if current_user.username == user.username %}
+            My
+        {% endif %}
+        Profile
+    </h1>
+    
+    <p>Username: {{ user.username }}</p>
+
+    {% if user.name %}
+        <p>Name: {{ user.name | capitalize}}</p>
     {% endif %}
+
+    {% if user.location %}
+        <p>From <a href="http://maps.google.com/?q={{ user.location }}">{{ user.location }}</a></p>
+    {% endif %}
+
+    {% if current_user.is_admin() %}
+        <p>Email: <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+    {% endif %}
+
+    {% if user.about_me %}
+        <p>About: {{ user.about_me }}</p>
+    {% endif %}
+
+    <p>Member since {{ moment(user.member_since).format('L') }}</p>
+    <p>Last activity {{ moment(user.last_seen).fromNow() }}</p>
 {% endblock %}
 

@@ -43,10 +43,6 @@ def index():
         known=session.get('known', False),
         current_time=datetime.utcnow())
 
-@main.route('/hello/<name>')
-def hello(name):
-    return render_template('user.html', user=name)
-
 @main.route('/secret')
 @login_required
 def secret():
@@ -69,3 +65,8 @@ def for_moderators_only():
     title = 'Moderate Page'
     details = 'This page should only be visible to users that has Moderate permission.'
     return render_template('simple_page.html', title=title, details=details)
+
+@main.route('/user/<username>')
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template('user.html', user=user)
