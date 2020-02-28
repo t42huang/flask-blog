@@ -49,5 +49,9 @@
     <p>Member since {{ moment(user.member_since).format('L') }}</p>
     <p>Last activity {{ moment(user.last_seen).fromNow() }}</p>
 </div>
+
+<h3>Posts by {{ user.username }}</h3>
+{% include '_posts.html' %}
+
 {% endblock %}
 
