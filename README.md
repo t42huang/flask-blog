@@ -4,20 +4,23 @@
 
 ### Prerequisites
 
-- Note: the commands in this instruction are for Mac OS, other OS users might need to find equivalent commands to run
+Note: the commands in this instruction are for Mac OS, other OS users might need to find equivalent commands to run
+
 - have this repository, either via git clone or download & unzip
 - have python3 installed
 - navigiate to this repo, create a virtual environment: `python3 -m venv venv`, where the 2ed `venv` is the name of the virtual environment
 - activate this virtual environment: `source venv/bin/activate`, you should have `(venv)` prefix at your terminal prompt. (BTW, to deactivate it, simply run `deactivate`)
-- install `Flask` in this virtual environment: `pip install flask`
-- install flask extension:
+- in this virtual environment, install `Flask` and other dependencies: `pip install flask`, for example:
   - `Bootstrap`: `pip install flask-bootstrap`
   - `Moment`: `pip install flask-moment`
   - `flask-wtf`: `pip install flask-wtf`
   - `SQLALchemy`: `pip install flask-sqlalchemy`
   - Alembic wrapper - `Flask-Migrate`: `pip install flask-migrate`
-    - then run `flask db upgrade` in terminal
-  - `Flask-Mail`: `pip install flask-mail`, then add the following into your `~/.bash_profile`:
+  - `Flask-Mail`: `pip install flask-mail`
+
+### To have the app up running
+
+- Mail related configuration - add the following into your `~/.bash_profile`:
 
 ```bash
 export MAIL_SERVER=<Your Mail SMTP Server>
@@ -27,8 +30,7 @@ export FLASKBLOG_SENDER='Flask Blog Admin <xxx@yyy.com>' # admin & email
 export FLASKBLOG_ADMIN=xxx@yyy.com # admin's email
 ```
 
-### To have the app up running
-
+- in terminal, run `flask db upgrade` to setup database
 - simply run `python app.py`
 - you should have your app served up on `http://127.0.0.1:5000/` by default
 
@@ -57,60 +59,7 @@ export FLASKBLOG_ADMIN=xxx@yyy.com # admin's email
 - Flask-Login
 - itsdangerous
 
-## Notes on Database Population
-
-```python & bash
->>> export FLASK_APP=index.py
->>> flask shell
-
-# no need to run these 2 lines anymore after we add `shell_context_processor` in index.py
->>> from index import db
->>> from index import Role, User
-
->>> db.create_all() # create database defined in index.py, only need to run once
-
->>> # populate database manually
->>> admin = Role(name="Admin")
->>> worker = Role(name="Worker")
->>> manager = Role(name="Manager")
->>> kevin = User(username='Kevin', role=manager)
->>> gord = User(username='Gord', role=admin)
->>> hector = User(username='Hector', role=worker)
-
->>> print(worker)
-<Role 'Worker'>
->>> print(admin)
-<Role 'Admin'>
->>> print(worker.name)
-Worker
->>> print(hector.role)
-<Role 'Worker'>
->>> print(hector.id)
-None
->>> print(admin.id)
-None
-
->>> # commmit session changes
->>> db.session.add_all([admin,worker,manager,kevin,gord,hector])
->>> db.session.commit()
-
->>> print(hector.id)
-2
->>> print(admin.id)
-1
-
-# database queries
->>> Role.query.all()
-[<Role 'Administrator'>, <Role 'Worker'>, <Role 'Manager'>]
->>> User.query.all()
-[<User 'Gord'>, <User 'Hector'>, <User 'Kevin'>]
->>> User.query.filter_by(role=worker).all()
-[<User 'Hector'>]
->>> User.query.filter_by(role=admin).first()
-<User 'Gord'>
-```
-
-## Other Notes
+## Notes
 
 - Check cookie session using [JSON Web Tokens](https://jwt.io/)
 - Obtain all dependencies: `pip freeze >requirements.txt`
