@@ -34,6 +34,15 @@ export FLASKBLOG_ADMIN=xxx@yyy.com # admin's email
 - simply run `python app.py`
 - you should have your app served up on `http://127.0.0.1:5000/` by default
 
+#### [Dev Only] Populate Database with Fake test data
+
+```bash
+$ flask shell
+>>> from app import fake
+>>> fake.user() # to create a bounch of fake users
+>>> fake.post() # to create a bounch of fake posts
+```
+
 ## Notes on Flask
 
 ### command-line options
@@ -58,6 +67,10 @@ export FLASKBLOG_ADMIN=xxx@yyy.com # admin's email
 - Werkzeug for Password hashing and verification (alternatives: bcrypt, Passlib)
 - Flask-Login
 - itsdangerous
+
+#### Extensions for Dev
+
+- Flask-Fake
 
 ## Notes
 
