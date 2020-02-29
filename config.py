@@ -23,6 +23,8 @@ class Config:
     FB_MAIL_SENDER = os.environ.get('FLASKBLOG_SENDER')
     FLASKBLOG_ADMIN = os.environ.get('FLASKBLOG_ADMIN')
 
+    FBLOG_POSTS_PER_PAGE = 3 # 20
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod
