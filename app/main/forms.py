@@ -7,7 +7,11 @@ from ..models import Role, User
 
 class PostForm(FlaskForm):
     body = PageDownField("What's on your mind?", validators=[DataRequired()])
-    submit = SubmitField('Save')
+    submit = SubmitField('Publish')
+
+class CommentForm(FlaskForm):
+    body = PageDownField("", validators=[DataRequired()])
+    submit = SubmitField('Comment')
 
 class NameForm(FlaskForm):
     name = StringField("What's your name?", validators=[DataRequired()])
