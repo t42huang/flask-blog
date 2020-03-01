@@ -31,6 +31,13 @@ export FLASKBLOG_ADMIN=xxx@yyy.com # admin's email
 ```
 
 - in terminal, run `flask db upgrade` to setup database
+- initialize all Roles
+
+```bash
+$ flask shell
+>>> Role.insert_roles()
+```
+
 - simply run `python app.py`
 - you should have your app served up on `http://127.0.0.1:5000/` by default
 
@@ -39,8 +46,8 @@ export FLASKBLOG_ADMIN=xxx@yyy.com # admin's email
 ```bash
 $ flask shell
 >>> from app import fake
->>> fake.user() # to create a bounch of fake users
->>> fake.post() # to create a bounch of fake posts
+>>> fake.users() # to create a bounch of fake users
+>>> fake.posts() # to create a bounch of fake posts
 ```
 
 ## Notes on Flask
