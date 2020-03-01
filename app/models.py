@@ -145,6 +145,11 @@ class User(UserMixin, db.Model):
         f = self.followed.filter_by(followed_id=user.id).first()
         if f:
             db.session.delete(f)
+    
+    @property
+    def followed_posts(self):
+        return Post.query.join(Follow, Follow.followed_id == Post.author_id)\
+                .filter(Follow.follower_id == self.id)
 
     @property
     def password(self):
@@ -223,6 +228,8 @@ class User(UserMixin, db.Model):
     
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
+
+        self.follow(self)
         
         if self.email is not None and self.avatar_hash is None:
             self.avatar_hash = self.gravatar_hash()
@@ -232,6 +239,14 @@ class User(UserMixin, db.Model):
                 self.role = Role.query.filter_by(name='Administrator').first()
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
+
+    @staticmethod
+    def add_self_follows():
+        for user in User.query.all():
+            if not user.is_following(user):
+                user.follow(user)
+                db.session.add(user)
+                db.session.commit()
 
     def gravatar_hash(self):
         return hashlib.md5(self.email.lower().encode('utf-8')).hexdigest()

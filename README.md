@@ -31,11 +31,12 @@ export FLASKBLOG_ADMIN=xxx@yyy.com # admin's email
 ```
 
 - in terminal, run `flask db upgrade` to setup database
-- initialize all Roles
+- Run other commands
 
 ```bash
 $ flask shell
->>> Role.insert_roles()
+>>> Role.insert_roles() # initialize all Roles
+>>> User.add_self_follows() # for existing users, add themselves as followers
 ```
 
 - simply run `python app.py`
