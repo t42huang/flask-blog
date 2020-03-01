@@ -32,6 +32,11 @@ def index():
     return render_template('index.html', form=form, posts=posts, 
         pagination=pagination)
 
+@main.route('/post/<int:id>')
+def post(id):
+    post = Post.query.get_or_404(id)
+    return render_template('post.html', posts=[post])
+
 @main.route('/secret')
 @login_required
 def secret():
