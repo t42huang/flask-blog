@@ -67,6 +67,7 @@ $ flask shell
 - Werkzeug for Password hashing and verification (alternatives: bcrypt, Passlib)
 - Flask-Login
 - itsdangerous
+- packages to enable Markdown Rich-Text blog post: Flask-Pagedown, Markdown, bleach
 
 #### Extensions for Dev
 
