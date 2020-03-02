@@ -69,6 +69,14 @@ $ # using the auth token obtained above
 $ http --json --auth eyJhbGciOiJIUzUxMiI...: GET http://127.0.0.1:5000/api/v1/posts/
 ```
 
+### To Get Test Coverage
+
+```bash
+$ export FBLOG_COVERAGE=1 # to persist this config, add it in your ~/.bash_profile
+
+$ flask test --coverage
+```
+
 ## Notes on Flask
 
 ### command-line options
