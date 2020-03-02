@@ -77,6 +77,11 @@ $ export FBLOG_COVERAGE=1 # to persist this config, add it in your ~/.bash_profi
 $ flask test --coverage
 ```
 
+## TODOs
+
+- Performance - Source Code Profiling doesn't work yet
+
+
 ## Notes on Flask
 
 ### command-line options
