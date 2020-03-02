@@ -9,7 +9,7 @@ from flask_login import UserMixin, AnonymousUserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from markdown import markdown
 import bleach
-from . import db, login_manager
+from . import db, login_manager, ValidationError
 
 class Comment(db.Model):
     __tablename__ = 'comments'
