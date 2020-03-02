@@ -27,6 +27,9 @@ class Config:
     FBLOG_COMMENTS_PER_PAGE = 3
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_RECORD_QUERIES = True
+    FBLOG_SLOW_DB_QUERY_TIME = 0.5
+    
 
     @staticmethod
     def init_app(app):
