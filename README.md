@@ -51,6 +51,24 @@ $ flask shell
 >>> fake.posts() # to create a bounch of fake posts
 ```
 
+### To test REST API
+
+To test REST API, run the following example commands in the terminal (using your own `<email>` and `<password>`)
+
+```bash
+$ http --json --auth <email>:<password> GET http://127.0.0.1:5000/api/v1/posts/
+
+$ http --auth <email>:<password> --json POST \
+> http://127.0.0.1:5000/api/v1/posts/ \
+> "body=I'm adding a post from the *command line*."
+
+$ # get auth token to avoid sending email and password for every single api request
+$ http --auth <email>:<password> --json POST http://127.0.0.1:5000/api/v1/tokens/
+
+$ # using the auth token obtained above
+$ http --json --auth eyJhbGciOiJIUzUxMiI...: GET http://127.0.0.1:5000/api/v1/posts/
+```
+
 ## Notes on Flask
 
 ### command-line options

@@ -1,7 +1,7 @@
 from datetime import datetime
 import hashlib
 
-from flask import current_app, request
+from flask import current_app, request, url_for
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -47,6 +47,25 @@ class Post(db.Model):
             'i', 'li', 'ol', 'pre', 'strong', 'ul', 'h1', 'h2', 'h3', 'p']
         target.body_html = bleach.linkify(bleach.clean(
             markdown(value, output_format='html'), tags=allowed_tags, strip=True))
+        
+    def to_json(self):
+        json_post = {
+            'url': url_for('api.get_post', id=self.id),
+            'body': self.body,
+            'body_html': self.body_html,
+            'timestamp': self.timestamp,
+            'author_url': url_for('api.get_user', id=self.author_id),
+            'comments_url': url_for('api.get_post_comments', id=self.id),
+            'comment_count': self.comments.count()
+        }
+        return json_post
+    
+    @staticmethod
+    def from_json(json_post):
+        body = json_post.get('body')
+        if body is None or body == '':
+            raise ValidationError('post does not have a body')
+        return Post(body=body)
 
 db.event.listen(Post.body, 'set', Post.on_change_body)
 
@@ -219,6 +238,20 @@ class User(UserMixin, db.Model):
         s = Serializer(current_app.config['SECRET_KEY'], expiration)
         return s.dumps({'reset': self.id}).decode('utf-8')
     
+    def generate_auth_token(self, expiration):
+        s = Serializer(current_app.config['SECRET_KEY'],
+            expires_in=expiration)
+        return s.dumps({'id': self.id}).decode('utf-8')
+    
+    @staticmethod
+    def verify_auth_token(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except:
+            return None
+        return User.query.get(data['id'])
+    
     @staticmethod
     def reset_password(token, new_password):
         s = Serializer(current_app.config['SECRET_KEY'])
@@ -294,6 +327,18 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
+    
+    def to_json(self):
+        json_user = {
+            'url': url_for('api.get_user', id=self.id),
+            'username': self.username,
+            'member_since': self.member_since,
+            'last_seen': self.last_seen,
+            'posts_url': url_for('api.get_user_posts', id=self.id),
+            'followed_posts_url': url_for('api.get_user_followed_posts', id=self.id),
+            'post_count': self.posts.count()
+        }
+        return json_user
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, permissions):
