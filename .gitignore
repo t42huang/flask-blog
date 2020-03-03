@@ -15,3 +15,6 @@ __pycache__/
 
 # testing temp folder
 tmp/
+
+# heroku config env variables
+.env

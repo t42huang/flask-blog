@@ -77,6 +77,37 @@ $ export FBLOG_COVERAGE=1 # to persist this config, add it in your ~/.bash_profi
 $ flask test --coverage
 ```
 
+## Deploy on Heroku
+
+```bash
+# create your own free heroku account, then log in from the terminal:
+$ heroku login -i
+
+# create postgresql database
+$ heroku addons:create heroku-postgresql:hobby-dev
+
+# configure your heroku environment, all of them can be configured in .env file with format "KEY=value"
+$ heroku config:set FLASK_APP=flaskblog.py
+$ heroku config:set FLASK_CONFIG=heroku
+
+$ ## for added security, config a secret key for production env, e.g.
+### first, you need to have a secure secret string 
+### you can obtain one using python, e.g.
+$ python -c "import uuid; print(uuid.uuid4().hex)" 
+f22ff38135b147b7836de9cdee05a556
+### configure your heroku account using your secret key, e.g.
+$ heroku config:set SECRET_KEY=f22ff38135b147b7836de9cdee05a556
+
+# EMAIL & SMTP configs
+heroku config:set MAIL_SERVER=<YOUR_MAIL_SERVER>
+heroku config:set MAIL_USERNAME=<YOUR_MAIL_USERNAME>
+heroku config:set MAIL_PASSWORD=<YOUR_MAIL_PASSWORD>
+
+heroku config:set FLASKBLOG_SENDER=<YOUR_FLASKBLOG_SENDER>
+heroku config:set FLASKBLOG_ADMIN=<YOUR_FLASKBLOG_ADMIN>
+
+```
+
 ## TODOs
 
 - Performance - Source Code Profiling doesn't work yet
