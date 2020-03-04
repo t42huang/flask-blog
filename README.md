@@ -105,6 +105,36 @@ heroku config:set MAIL_PASSWORD=<YOUR_MAIL_PASSWORD>
 
 heroku config:set FLASKBLOG_SENDER=<YOUR_FLASKBLOG_SENDER>
 heroku config:set FLASKBLOG_ADMIN=<YOUR_FLASKBLOG_ADMIN>
+```
+
+### deploy locally
+
+```bash
+# run deploy(), which includes create db, flask upgrade 
+$ heroku local:run flask deploy
+blablabla # setup configs, run deploy(), which includes create db, flask upgrade db, etc.
+
+# get the app runing
+$ heroku local
+blablabla Listening at: http://0.0.0.0:5000 blablabla
+
+# to use multiple dynos to scale the app locally
+$ heroku local web=3
+```
+
+### deploy to heroku
+
+```bash
+# first, commit all changes (to master branch) needed for this deployment
+
+# then push (master branch) to heroku
+$ git push heroku master
+
+# run deploy(), which includes create db, flask upgrade 
+$ heroku run flask deploy
+
+# restart the app so it runs with updated database setup
+$ heroku restart
 
 ```
 
