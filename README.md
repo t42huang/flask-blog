@@ -93,10 +93,10 @@ $ heroku config:set FLASK_CONFIG=heroku
 $ ## for added security, config a secret key for production env, e.g.
 ### first, you need to have a secure secret string 
 ### you can obtain one using python, e.g.
-$ python -c "import uuid; print(uuid.uuid4().hex)" 
+$ python -c "import uuid; print(uuid.uuid4().hex)"
 f22ff38135b147b7836de9cdee05a556
 ### configure your heroku account using your secret key, e.g.
-$ heroku config:set SECRET_KEY=f22ff38135b147b7836de9cdee05a556
+$ heroku config:set FB_SECRET_KEY=f22ff38135b147b7836de9cdee05a556
 
 # EMAIL & SMTP configs
 heroku config:set MAIL_SERVER=<YOUR_MAIL_SERVER>
