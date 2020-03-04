@@ -1,5 +1,9 @@
 # Flask Blog
 
+## Demo
+
+An example of this project is deployed at [Tina's Flask Blog](https://tinasflaskblog.herokuapp.com/).
+
 ## Notes on Setup
 
 ### Prerequisites
