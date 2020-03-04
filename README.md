@@ -83,6 +83,11 @@ $ flask test --coverage
 # create your own free heroku account, then log in from the terminal:
 $ heroku login -i
 
+# create a heroku app
+$ heroku create <appname>
+Creating <appname>... done
+https://<appname>.herokuapp.com/ | https://git.heroku.com/<appname>.git
+
 # create postgresql database
 $ heroku addons:create heroku-postgresql:hobby-dev
 
@@ -135,8 +140,35 @@ $ heroku run flask deploy
 
 # restart the app so it runs with updated database setup
 $ heroku restart
-
 ```
+
+After restart the deployment, you can play around with the app at `https://<appname>.herokuapp.com`.
+
+### Check app logs
+
+```bash
+$ heroku logs
+$ heroku logs --tail
+```
+
+### Upgrade or Maintainance
+
+After the app is deployed and people are using the app, during an upgrade or maintainance, we can take the app offline to avoid unexpected user experience:
+
+```bash
+$ heroku maintenance:on
+$ git push heroku master
+$ heroku run flask deploy
+$ heroku restart
+$ heroku maintenance:off
+```
+
+During the maintenance, the user will see a static page indicating the app is offline for maintenance:
+
+> Offline for maintenance
+> This app is undergoing maintenance right now.
+> 
+> Please check back later.
 
 ## TODOs
 
