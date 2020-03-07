@@ -206,6 +206,24 @@ docker ps -a
 # - httt://your-ip-address:8000 from another device in the same network
 ```
 
+### Push container to external registry
+
+You can host your images to Docker's image repository - Docker Hub registery.
+
+```bash
+# login docker with your docker account if you haven't
+docker login # -i flag for login within terminal interactively
+
+# tag the container
+docker tag flaskblog:latest <your-dockerhub-username>/flaskblog:latest
+
+# upload the image to Docker Hub
+docker push <your-dockerhub-username>/flaskblog:latest
+# The container image is now publicly available, and anybody can start a container based on it with the docker run command:
+docker run --name flaskblog -d -p 8000:5000 \
+<your-dockerhub-username>/flaskblog:latest
+```
+
 ### Some other useful commands:
 
 ```bash
