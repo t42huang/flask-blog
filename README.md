@@ -201,9 +201,33 @@ flaskblog:latest
 
 # check docker app running status
 docker ps -a
+# if it's running, you can test this app by going to
+# - http://localhost:8000, or http://0.0.0.0:8000
+# - httt://your-ip-address:8000 from another device in the same network
+```
+
+### Some other useful commands:
+
+```bash
+# add alias to get your ip address
+echo "export alias ip='ipconfig getifaddr en0'" >> ~/.bash_profile
+source ~/.bash_profile
 
 # check logs on the docker app flaskblog
 docker logs flaskblog
+
+# inspect the running container through a shell session
+docker exec -it flaskblog sh
+## note: to exit the shell, run command: `exit`
+
+# stop the running container
+docker stop flaskblog 
+
+# remove the container from the system
+docker rm flaskblog
+
+# to stop and remove the container from the system in one go, run this
+docker rm -f flaskblog
 
 ```
 
