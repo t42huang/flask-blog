@@ -174,6 +174,39 @@ During the maintenance, the user will see a static page indicating the app is of
 > 
 > Please check back later.
 
+## Docker
+
+```bash
+# add permission to execute on boot.sh
+chmod +x boot.sh
+
+# build the docker image
+docker build -t flaskblog:latest .
+
+# run the docker image (flask:latest) 
+#   with customized name (flaskblog), in detached mode (-d), 
+#   mapping port 8000 on host computer to docker image port 5000, 
+#   with some environment variables (-e)
+docker run \
+--name flaskblog \
+-d \
+-p 8000:5000 \
+-e FB_SECRET_KEY=<your-secret-key> \
+-e MAIL_SERVER=<your-smtp-server> \
+-e MAIL_USERNAME=<your-smtp-email> \
+-e MAIL_PASSWORD=<your-smtp-email-password> \
+-e FLASKBLOG_SENDER='Flask Blog Admin <your-admin-email>' \
+-e FLASKBLOG_ADMIN=<your-admin-email> \
+flaskblog:latest
+
+# check docker app running status
+docker ps -a
+
+# check logs on the docker app flaskblog
+docker logs flaskblog
+
+```
+
 ## TODOs
 
 - Performance - Source Code Profiling doesn't work yet
