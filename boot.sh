@@ -1,4 +1,13 @@
 #!/bin/sh
 source venv/bin/activate
-flask deploy
+
+while true; do
+    flask deploy
+    if [[ "$?" == "0" ]]; then # "$?" refer to the exit status of previous cmd - "flask deploy"
+        break
+    fi
+    echo Deploy command failed, retrying in 5 secs ...
+    sleep 5
+done
+
 exec gunicorn -b 0.0.0.0:5000 --access-logfile - --error-logfile - flaskblog:app

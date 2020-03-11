@@ -19,5 +19,8 @@ tmp/
 # heroku config env variables
 .env
 
+# mysql db configs
+.env-mysql
+
 # some notes
 .note

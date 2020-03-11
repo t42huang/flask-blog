@@ -224,7 +224,53 @@ docker run --name flaskblog -d -p 8000:5000 \
 <your-dockerhub-username>/flaskblog:latest
 ```
 
-### Some other useful commands:
+### Run seperate container for database
+
+```bash
+# run seperate container for database
+docker run --name mysql -d \
+-e MYSQL_RANDOM_ROOT_PASSWORD=yes \
+-e MYSQL_DATABASE=flaskblog \
+-e MYSQL_USER=flaskblog \
+-e MYSQL_PASSWORD=<database-password> \
+mysql/mysql-server:5.7
+```
+
+### Use docker composer to link containers
+
+```bash
+# use docker compose to build and run the containers for the app
+docker-compose up -d --build
+
+# when it is done, 
+## 1. you can check if the app is working by visiting: 
+# - http://localhost:8000, or http://0.0.0.0:8000
+# - httt://your-ip-address:8000 from another device in the same network
+
+## 2. you should have 2 linked containers running for the flaskblog app
+docker ps
+## one for the flaskblog app, e.g. flaskblog_flaskblog_1
+## another for the mysql database, e.g. flaskblog_mysql_1
+
+# You can double-check the database is working as expected:
+# 1. run following commands to get the generated root password from log
+docker logs flaskblog_mysql_1
+# 2. copy the root password string from the logs
+
+# 3. inspect the mysql container
+docker exec -it flaskblog_mysql_1
+
+# 4. log into the mysql database in the container
+mysql -h localhost -u root -p
+Enter password: # use the password copied from the docker logs
+
+# 5. do whatever query is necessary for double checking
+mysql> USE flaskblog;
+mysql> SHOW TABLES;
+mysql> SELECT * FROM USERS;
+```
+
+### Some other useful commands
 
 ```bash
 # add alias to get your ip address

@@ -10,7 +10,8 @@ WORKDIR /home/flaskblog
 
 COPY requirements requirements
 RUN python -m venv venv
-RUN venv/bin/pip install -r requirements/docker.txt
+RUN venv/bin/pip --default-timeout=10000 install -r requirements/docker.txt
+# added the default-timeout here to avoid timeout error if has slow internet
 
 COPY app app
 COPY migrations migrations
