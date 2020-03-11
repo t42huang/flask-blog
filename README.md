@@ -21,6 +21,11 @@ Note: the commands in this instruction are for Mac OS, other OS users might need
   - `SQLALchemy`: `pip install flask-sqlalchemy`
   - Alembic wrapper - `Flask-Migrate`: `pip install flask-migrate`
   - `Flask-Mail`: `pip install flask-mail`
+- config environment variables: 
+  - if you need `.env` and/or `.env-mysql` file, you can based off yours from `template.env` and `template.env-mysql`
+  - These 2 template files contains the environment variables needed as key value pairs
+  - Change the values as you needed
+  - At least you need to change the emails, smtp, passwords and the secret key
 
 ### To have the app up running
 
